@@ -14,6 +14,9 @@ app.use(express.static(publicDirectoryPath))
 
 let count = 0
 
+// server (emit) -> client (receive) - countUpdated
+// client (emit) -> server (receive) - increment
+
 // server function for client connections
 io.on('connection', (socket) => {
     console.log('New WebSocket connection')
