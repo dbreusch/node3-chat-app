@@ -14,7 +14,13 @@ messageForm.addEventListener('submit', (e) => {
     e.preventDefault()  // stop form refresh after submit
 
     const message = e.target.elements.message.value
-    socket.emit('sendMessage', message)
+    socket.emit('sendMessage', message, (error) => {
+        if (error) {
+            return console.log(error)
+        }
+
+        console.log('The message was delivered')
+    })
 })
 
 // send location event
@@ -31,6 +37,8 @@ locationButton.addEventListener('click', (e) => {
         socket.emit('sendLocation', {
             latitude: lat,
             longitude: lon
+        }, () => {
+            console.log('Location shared!')
         })
     })
 })
