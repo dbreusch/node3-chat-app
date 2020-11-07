@@ -2,19 +2,32 @@
 
 const socket = io()
 
-const messageForm = document.querySelector('#message-form')
-const locationButton = document.querySelector('#send-location')
+// Elements
+//   Form
+const $messageForm = document.querySelector('#message-form')
+const $messageFormInput = $messageForm.querySelector('input')
+const $messageFormButton = $messageForm.querySelector('button')
+//   Location button
+const $sendLocationButton = document.querySelector('#location-button')
 
 socket.on('message', (message) => {
     console.log(message)
 })
 
 // send event to server when form button is clcked
-messageForm.addEventListener('submit', (e) => {
+$messageForm.addEventListener('submit', (e) => {
     e.preventDefault()  // stop form refresh after submit
+
+    //disable send button
+    $messageFormButton.setAttribute('disabled', 'disabled')
 
     const message = e.target.elements.message.value
     socket.emit('sendMessage', message, (error) => {
+        // (re)enable send button, clear input, focus on input
+        $messageFormButton.removeAttribute('disabled', 'disabled')
+        $messageFormInput.value = ''
+        $messageFormInput.focus()
+
         if (error) {
             return console.log(error)
         }
@@ -24,10 +37,13 @@ messageForm.addEventListener('submit', (e) => {
 })
 
 // send location event
-locationButton.addEventListener('click', (e) => {
+$sendLocationButton.addEventListener('click', (e) => {
     if (!navigator.geolocation) {
         return alert('Geolocation is not supported by your browser')
     }
+
+    //disable send button
+    $sendLocationButton.setAttribute('disabled', 'disabled')
 
     // getCurrentPosition is async but does NOT support Promises
     navigator.geolocation.getCurrentPosition((position) => {
@@ -38,6 +54,8 @@ locationButton.addEventListener('click', (e) => {
             latitude: lat,
             longitude: lon
         }, () => {
+            // (re)enable send button
+            $sendLocationButton.removeAttribute('disabled', 'disabled')
             console.log('Location shared!')
         })
     })
