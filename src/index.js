@@ -20,9 +20,11 @@ app.use(express.static(publicDirectoryPath))
 io.on('connection', (socket) => {
     console.log('New WebSocket connection')
 
+    // connection entry messages
     socket.emit('message', 'Welcome!')
     socket.broadcast.emit('message', 'A new user has joined!')
 
+    // handler for sendMessage event
     socket.on('sendMessage', (message, callback) => {
         const filter = new Filter()
 
@@ -34,12 +36,13 @@ io.on('connection', (socket) => {
         callback()
     })
 
+    // handler for sendLocation event
     socket.on('sendLocation', (coords, callback) => {
-        // io.emit('message', `Location: ${coords.latitude}, ${coords.longitude}`)
-        io.emit('message', `https://google.com/maps?q=${coords.latitude},${coords.longitude}`)
+        io.emit('locationMessage', `https://google.com/maps?q=${coords.latitude},${coords.longitude}`)
         callback()
     })
 
+    // handler for disconnect event
     socket.on('disconnect', () => {
         io.emit('message', 'A user has left!')
     })
