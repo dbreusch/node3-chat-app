@@ -19,7 +19,7 @@ app.use(express.static(publicDirectoryPath))
 
 // handle client connections
 io.on('connection', (socket) => {
-    console.log('New WebSocket connection')
+    // console.log('New WebSocket connection')
 
     // connection entry messages
     socket.emit('message', generateMessage('Welcome!'))
