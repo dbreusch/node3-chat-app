@@ -37,22 +37,52 @@ addUser({
     username: 'Dave',
     room: 'Office'
 })
+addUser({
+    id: 23,
+    username: 'Bob',
+    room: 'Office'
+})
+addUser({
+    id: 19,
+    username: 'Sally',
+    room: 'Kitchen'
+})
 
-console.log(users)
+// console.log(users)
 
 // removeUser
 const removeUser = (id) => {
-    const index = users.findIndex((user) => {
-        return user.id === id
-    })
+    const index = users.findIndex((user) => user.id === id
+    )
 
     if (index !== -1) {
         return users.splice(index, 1)[0]    // return user removed
     }
 }
 
-const removedUser = removeUser(22)
-console.log(removedUser)
-console.log(users)
 // getUser
+const getUser = (id) => {
+    return users.find((user) => user.id === id
+    )
+}
+
+// const user = getUser(22)
+// console.log(user)
+
 // getUsersInRoom
+const getUsersInRoom = (room) => {
+    room = room.trim().toLowerCase()    // no harm in being sure room is "clean"
+    return users.filter((user) => {
+        return user.room === room
+    })
+}
+
+// const userList = getUsersInRoom('office')
+// console.log(userList``)
+
+module.exports = {
+    addUser,
+    removeUser,
+    getUser,
+    getUsersInRoom
+}
