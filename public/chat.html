@@ -5,6 +5,13 @@
         <title>Chat App</title>
         <link rel="icon" href="/img/favicon.png">
         <link rel="stylesheet" href="/css/styles.css">
+
+        <!-- Needed a style to get rid of red outline on input box, a Firefox quirk? -->
+        <style>
+            input:invalid {
+                box-shadow: none;
+            }
+        </style>
     </head>
 
     <body>
@@ -13,15 +20,20 @@
 
             </div>
             <div class="chat__main">
-                <div id="messages" class="chat__messages"></div>
+                <div id="messages" class="chat__messages">
+                </div>
 
                 <div class="compose">
-                    <form id="message-form" novalidate>
-                        <input name="message" type="text" placeholder="Message" required autocomplete="off">
-                        <button class="send-button">Send</button>
+                    <form id="message-form">
+                        <input name="message" type="text"
+                            placeholder="Message" required
+                            autocomplete="off">
+                        <button
+                            class="send-button">Send</button>
                     </form>
 
-                    <button id="location-button">Send location</button>
+                    <button id="location-button">Send
+                        location</button>
                 </div>
             </div>
         </div>
@@ -38,7 +50,8 @@
         </script>
 
         <!-- locationMessage template  -->
-        <script id="location-message-template" type="text/html">
+        <script id="location-message-template"
+            type="text/html">
             <div class="message">
                 <p>
                 <span class="message__name">{{username}}</span>
@@ -61,9 +74,12 @@
         </script>
 
         <!-- add utility libraries -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
 
         <!-- add socket.io client library -->
         <script src="/socket.io/socket.io.js"></script>
