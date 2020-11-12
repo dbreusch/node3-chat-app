@@ -32,21 +32,21 @@ const addUser = ({ id, username, room }) => {
 
 }
 
-addUser({
-    id: 22,
-    username: 'Dave',
-    room: 'Office'
-})
-addUser({
-    id: 23,
-    username: 'Bob',
-    room: 'Office'
-})
-addUser({
-    id: 19,
-    username: 'Sally',
-    room: 'Kitchen'
-})
+// addUser({
+//     id: 22,
+//     username: 'Dave',
+//     room: 'Office'
+// })
+// addUser({
+//     id: 23,
+//     username: 'Bob',
+//     room: 'Office'
+// })
+// addUser({
+//     id: 19,
+//     username: 'Sally',
+//     room: 'Kitchen'
+// })
 
 // console.log(users)
 
